@@ -1,0 +1,23 @@
+services:
+  webapp:
+    build: app/.
+    ports:
+      - target: 8000
+        published: 8000
+    networks:
+      - isnet
+    depends_on:
+      - dbhost
+  dbhost:
+    build: db/.
+    environment:
+      - POSTGRES_PASSWORD=qaz123wsx
+      - POSTGRES_HOST_AUTH_METHOD=md5
+      - POSTGRES_DB=irksecrets
+    ports:
+      - target: 5432
+        published: 5432
+    networks:
+      - isnet
+networks:
+  isnet:
